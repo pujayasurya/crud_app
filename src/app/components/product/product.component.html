@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <h2>Product List</h2>
+    <div class="text-end">
+        <button class="btn btn-primary mb-3" (click)="addProduct()">Add Product</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td class="text-center">{{ product.id }}</td>
+                <td class="text-center">{{ product.name }}</td>
+                <td class="text-center">{{ product.category }}</td>
+                <td class="text-end">{{ product.price | currency:'INR':'symbol':'1.2-2' }}</td>
+                <td class="text-center">{{ product.description }}</td>
+                <td class="text-center">
+                    <button class="btn btn-info me-2" (click)="editProduct(product.id)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
