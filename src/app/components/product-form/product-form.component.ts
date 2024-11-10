@@ -12,6 +12,7 @@ import { Product } from '../../model/product.model';
 export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   productId: string | null = null;
+  todayDate = new Date().toISOString().split('T')[0];
 
   constructor(
     private fb: FormBuilder,
@@ -20,9 +21,10 @@ export class ProductFormComponent implements OnInit {
     private router: Router
   ) {
     this.productForm = this.fb.group({
+      date: [this.todayDate, Validators.required],
       name: ['', Validators.required],
       category: ['', Validators.required],
-      price: ['', Validators.required],
+      price: [0, Validators.required],
       description: ['', Validators.required],
     });
   }

@@ -5,29 +5,36 @@
     </div>
     <form class="card-body" [formGroup]="productForm" (ngSubmit)="saveProduct()">
         <div class="mb-3">
-            <label>Name</label>
-            <input type="text" class="form-control" formControlName="name">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" formControlName="date">
+            <div *ngIf="this.productForm.get('date')?.value.length==0 && this.productForm.get('date')?.dirty">
+                <p class="text-danger">Product Date is Mandatory</p>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter the name">
             <div *ngIf="this.productForm.get('name')?.value.length==0 && this.productForm.get('name')?.dirty">
                 <p class="text-danger">Product Name is Mandatory</p>
             </div>
         </div>
         <div class="mb-3">
-            <label>Category</label>
-            <input type="text" class="form-control" formControlName="category">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" formControlName="category" placeholder="Enter the category">
             <div *ngIf="this.productForm.get('category')?.value.length==0 && this.productForm.get('category')?.dirty">
                 <p class="text-danger">Product Category is Mandatory</p>
             </div>
         </div>
         <div class="mb-3">
-            <label>Price</label>
-            <input type="number" class="form-control" formControlName="price" />
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" formControlName="price" placeholder="Enter the price" />
             <div *ngIf="this.productForm.get('price')?.value=='' && this.productForm.get('price')?.dirty">
                 <p class="text-danger">Product Price is Mandatory</p>
             </div>
         </div>
         <div class="mb-3">
-            <label>Description</label>
-            <input type="text" class="form-control" formControlName="description">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Enter the description">
         </div>
         <div class="text-end">
             <button type="button" [routerLink]="['/']" class="btn btn-danger me-2">Go Back</button>
