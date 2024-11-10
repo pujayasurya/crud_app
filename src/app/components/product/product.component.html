@@ -11,10 +11,11 @@
         <thead>
             <tr>
                 <th class="text-center">ID</th>
-                <th class="text-center">Name</th>
-                <th class="text-center">Category</th>
-                <th class="text-center">Price</th>
-                <th class="text-center">Description</th>
+                <th (click)="toggleSort('date')" class="text-center">Date</th>
+                <th (click)="toggleSort('name')" class="text-center">Name</th>
+                <th (click)="toggleSort('category')" class="text-center">Category</th>
+                <th (click)="toggleSort('price')" class="text-center">Price</th>
+                <th (click)="toggleSort('description')" class="text-center">Description</th>
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
         <tbody *ngIf="filteredProducts.length>0">
             <tr *ngFor="let product of filteredProducts">
                 <td class="text-center">{{ product.id }}</td>
+                <td class="text-center">{{ product.date }}</td>
                 <td class="text-center">{{ product.name }}</td>
                 <td class="text-center">{{ product.category }}</td>
                 <td class="text-end">{{ product.price | currency:'INR':'symbol':'1.2-2' }}</td>
