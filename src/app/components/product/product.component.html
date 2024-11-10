@@ -1,7 +1,11 @@
 <div class="container mt-4">
-    <h2>Product List</h2>
+    <h4>Product List</h4>
     <div class="text-end">
         <button class="btn btn-primary mb-3" (click)="addProduct()">Add Product</button>
+    </div>
+    <div>
+        <input class="form-control" [(ngModel)]="filterText" (ngModelChange)="filterProducts()"
+            placeholder="Search By Product Name" />
     </div>
     <table class="table table-striped">
         <thead>
@@ -14,18 +18,26 @@
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
+
+        <tbody *ngIf="filteredProducts.length>0">
+            <tr *ngFor="let product of filteredProducts">
                 <td class="text-center">{{ product.id }}</td>
                 <td class="text-center">{{ product.name }}</td>
                 <td class="text-center">{{ product.category }}</td>
                 <td class="text-end">{{ product.price | currency:'INR':'symbol':'1.2-2' }}</td>
                 <td class="text-center">{{ product.description }}</td>
                 <td class="text-center">
-                    <button class="btn btn-info me-2" (click)="editProduct(product.id)">Edit</button>
-                    <button class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
+                    <button class="btn btn-info me-2" (click)="editProduct(product.id)">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <div class="text-center font-weight-bold" *ngIf="filteredProducts.length==0">
+        <p>No Items Found</p>
+    </div>
 </div>

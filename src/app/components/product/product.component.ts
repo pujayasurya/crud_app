@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../model/product.model';
 import { Router } from '@angular/router';
+import { faSortDesc, faSortAsc, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-product',
@@ -9,8 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  filterText: string = "";
   products: Product[] = [];
-
+  filteredProducts: Product[] = [];
+  faSortDesc = faSortDesc;
+  faSortAsc = faSortAsc;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  
   constructor(
     private productService: ProductService,
     private router: Router
@@ -23,7 +30,14 @@ export class ProductComponent implements OnInit {
   getProducts(): void {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
+      this.filteredProducts = data;
     });
+  }
+
+  filterProducts(): void {
+    this.filteredProducts = this.products.filter(product =>
+      product.name.toLowerCase().includes(this.filterText.toLowerCase())
+    );
   }
 
   deleteProduct(id: string): void {
