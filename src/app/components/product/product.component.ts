@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
 
   deleteProduct(id: string): void {
     this.productService.deleteProduct(id).subscribe(() => {
-      this.getProducts(); // Refresh the list after deletion
+      this.getProducts();
     });
   }
 
