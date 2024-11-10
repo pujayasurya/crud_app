@@ -28,6 +28,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    ///////////////////////////////////
+    // GET ID FROM THE CURRENT URL
+    ///////////////////////////////////
     this.productId = this.route.snapshot.paramMap.get('id');
     if (this.productId) {
       this.productService.getProductById(this.productId).subscribe((product) => {
@@ -40,20 +43,20 @@ export class ProductFormComponent implements OnInit {
     if (this.productForm.valid) {
       const product: Product = this.productForm.value;
       if (this.productId) {
-        // Edit
+        ////////////////////////////
+        // POST FOR EDIT EXISTING
+        ////////////////////////////
         this.productService.updateProduct(this.productId, product).subscribe(() => {
           this.router.navigate(['/']);
         });
       } else {
-        // Add
+        //////////////////////////
+        // POST FOR ADD NEW DATA
+        //////////////////////////
         this.productService.createProduct(product).subscribe(() => {
           this.router.navigate(['/']);
         });
       }
     }
-  }
-
-  goToHome(): void {
-    this.router.navigate(['']);
   }
 }
